@@ -1,11 +1,19 @@
 import "./post.css";
 import { MoreVert } from "@mui/icons-material";
-import { Users } from "../../dummyData";
 import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from "react";
+import { fetchUser } from "../../redux/userSlice";
 
 export default function Post({ post }) {
-  const [like,setLike] = useState(post.like)
+  const [like,setLike] = useState(post.likes.length)
   const [isLiked,setIsLiked] = useState(false)
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUser(post.userId));
+  }, []);
+  console.log(user);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
   const likeHandler =()=>{
@@ -19,11 +27,11 @@ export default function Post({ post }) {
           <div className="postTopLeft">
             <img
               className="postProfileImg"
-              src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
+              src={user[post.userId].profilePicture || PF+"self.png"}
               alt=""
             />
             <span className="postUsername">
-              {Users.filter((u) => u.id === post?.userId)[0].username}
+              {user[post.userId].username}
             </span>
             <span className="postDate">{post.date}</span>
           </div>
@@ -33,7 +41,7 @@ export default function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={PF+post.photo} alt="" />
+          <img className="postImg" src={PF+post.img} alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

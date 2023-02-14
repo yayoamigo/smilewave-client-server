@@ -34,7 +34,6 @@ const postSlice = createSlice({
         .addCase(fetchPost.fulfilled, (state,  {payload} ) => {
         state.isLoading = false;
         state.post = payload
-        console.log(state.post);
     })
         .addCase(fetchPost.rejected, (state) => {
         state.isLoading = false;

@@ -10,8 +10,7 @@ export default function Feed() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPost());
-  }, [post]);
-console.log(post);
+  }, []);
   return (
     <div className="feed">
       
