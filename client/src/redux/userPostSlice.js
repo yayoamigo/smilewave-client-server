@@ -2,12 +2,12 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 
 const initialState = {
-    post: [], isLoading: true,
+    postUser: [], isLoading: true,
 };
 
-export const fetchPost = createAsyncThunk('fetchPost', async () => {
+export const fetchPostUser = createAsyncThunk('fetchPostUser', async (username) => {
     try {
-      const response = await fetch("posts/timeline/63e41b996dd452f776eab9f1");
+      const response = await fetch(`/posts/profile/${username}`);
   
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -21,25 +21,25 @@ export const fetchPost = createAsyncThunk('fetchPost', async () => {
     }
   });
 
-const postSlice = createSlice({
+const postUserSlice = createSlice({
     name: 'GET',
     initialState,
     reducers: {
     },
     extraReducers: (builder) => {
     builder
-        .addCase(fetchPost.pending, (state) => {
+        .addCase(fetchPostUser.pending, (state) => {
         state.isLoading = true;
         })
-        .addCase(fetchPost.fulfilled, (state,  {payload} ) => {
+        .addCase(fetchPostUser.fulfilled, (state,  {payload} ) => {
         state.isLoading = false;
-        state.post = payload
+        state.postUser = payload
     })
-        .addCase(fetchPost.rejected, (state) => {
+        .addCase(fetchPostUser.rejected, (state) => {
         state.isLoading = false;
         });
     },
 });
 
 
-export default postSlice;
+export default postUserSlice;

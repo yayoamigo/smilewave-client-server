@@ -1,11 +1,21 @@
 import "./post.css";
 import { MoreVert } from "@mui/icons-material";
-import { Users } from "../../dummyData";
 import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from "react";
+import { fetchUser } from "../../redux/userSlice";
+import {format} from "timeago.js"
+import { Link } from "react-router-dom";
 
 export default function Post({ post }) {
-  const [like,setLike] = useState(post.like)
+  const [like,setLike] = useState(post.likes.length)
   const [isLiked,setIsLiked] = useState(false)
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUser(post.userId));
+  }, []);
+
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
   const likeHandler =()=>{
@@ -17,15 +27,17 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <img
+          <Link to={`profile/${user[post.userId]?.username}`}>
+          <img
               className="postProfileImg"
-              src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
+              src={user[post.userId]?.profilePicture || PF+"self.png"}
               alt=""
             />
+          </Link>
             <span className="postUsername">
-              {Users.filter((u) => u.id === post?.userId)[0].username}
+              {user[post.userId]?.username || "user"}
             </span>
-            <span className="postDate">{post.date}</span>
+            <span className="postDate">{format(user[post.userId]?.createdAt || 22)}</span>
           </div>
           <div className="postTopRight">
             <MoreVert />
@@ -33,7 +45,7 @@ export default function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={PF+post.photo} alt="" />
+          <img className="postImg" src={PF+post.img} alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

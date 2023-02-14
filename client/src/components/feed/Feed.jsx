@@ -4,22 +4,28 @@ import "./feed.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from "react";
 import { fetchPost } from "../../redux/postSlice";
+import { fetchPostUser } from "../../redux/userPostSlice";
 
-export default function Feed() {
+export default function Feed({username}) {
+
   const post = useSelector((state) => state.post.post);
+  const postUser = useSelector((state) => state.postUser.postUser);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchPost());
-  }, [post]);
-console.log(post);
+    if(username){
+    dispatch(fetchPostUser(username)) } else {
+    dispatch(fetchPost());}
+  }, [username]);
+  console.log(postUser);
   return (
     <div className="feed">
-      
       <div className="feedWrapper">
         <Share />
-        {post.map((p) => (
-          <Post key={p._id} post={p} />
-        ))}
+        {username ? (
+          postUser.map((p) => <Post key={p._id} post={p} />)
+        ) : (
+          post.map((p) => <Post key={p._id} post={p} />)
+        )}
       </div>
     </div>
   );
