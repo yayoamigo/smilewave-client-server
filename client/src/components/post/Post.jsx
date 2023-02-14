@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from "react";
 import { fetchUser } from "../../redux/userSlice";
+import {format} from "timeago.js"
+import { Link } from "react-router-dom";
 
 export default function Post({ post }) {
   const [like,setLike] = useState(post.likes.length)
@@ -13,7 +15,7 @@ export default function Post({ post }) {
   useEffect(() => {
     dispatch(fetchUser(post.userId));
   }, []);
-  console.log(user);
+
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
   const likeHandler =()=>{
@@ -25,15 +27,17 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <img
+          <Link to={`profile/${user[post.userId]?.username}`}>
+          <img
               className="postProfileImg"
-              src={user[post.userId].profilePicture || PF+"self.png"}
+              src={user[post.userId]?.profilePicture || PF+"self.png"}
               alt=""
             />
+          </Link>
             <span className="postUsername">
-              {user[post.userId].username}
+              {user[post.userId]?.username || "user"}
             </span>
-            <span className="postDate">{post.date}</span>
+            <span className="postDate">{format(user[post.userId]?.createdAt || 22)}</span>
           </div>
           <div className="postTopRight">
             <MoreVert />
