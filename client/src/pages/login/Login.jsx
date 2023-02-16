@@ -1,27 +1,64 @@
+import {  useRef } from "react";
 import "./login.css";
+import { login } from "../../redux/authSlice";
+import { useSelector, useDispatch } from 'react-redux';
+import { CircularProgress } from '@mui/material';
 
 export default function Login() {
-  return (
-    <div className="login">
-      <div className="loginWrapper">
-        <div className="loginLeft">
-          <h3 className="loginLogo">Smilewave</h3>
-          <span className="loginDesc">
-          Say goodbye to negativity and hello to endless opportunities for friendship, support, and inspiration
-          </span>
-        </div>
-        <div className="loginRight">
-          <div className="loginBox">
-            <input placeholder="Email" className="loginInput" />
-            <input placeholder="Password" className="loginInput" />
-            <button className="loginButton">Log In</button>
-            <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton">
-              Create a New Account
-            </button>
-          </div>
-        </div>
+  const email = useRef();
+  const password = useRef();
+  const dispatch = useDispatch();
+  const isFetching = useSelector((state) => state.login.isFetching)
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(login(
+      { email: email.current.value, password: password.current.value },
+    ))
+  };
+ return (
+  <div className="login">
+    <div className="loginWrapper">
+      <div className="loginLeft">
+        <h3 className="loginLogo">smilewave</h3>
+        <span className="loginDesc">
+          Connect with friends and the world around you on Lamasocial.
+        </span>
+      </div>
+      <div className="loginRight">
+        <form className="loginBox" onSubmit={handleClick}>
+          <input
+            placeholder="Email"
+            type="email"
+            required
+            className="loginInput"
+            ref={email}
+          />
+          <input
+            placeholder="Password"
+            type="password"
+            required
+            minLength="4"
+            className="loginInput"
+            ref={password}
+          />
+          <button className="loginButton" type="submit" disabled={isFetching}>
+            {isFetching ? (
+              <CircularProgress />
+            ) : (
+              "Log In"
+            )}
+          </button>
+          <span className="loginForgot">Forgot Password?</span>
+          <button className="loginRegisterButton">
+            {isFetching ? (
+              <CircularProgress />
+            ) : (
+              "Create a New Account"
+            )}
+          </button>
+        </form>
       </div>
     </div>
-  );
+  </div>
+);
 }

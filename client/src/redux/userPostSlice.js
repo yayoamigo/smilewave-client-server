@@ -47,3 +47,4 @@ const postUserSlice = createSlice({
 
 export const { setPostUser } = postUserSlice.actions;
 export default postUserSlice;
+
