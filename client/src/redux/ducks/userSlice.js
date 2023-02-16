@@ -9,7 +9,7 @@ const initialState = {
 
 export const fetchUser = createAsyncThunk('fetchUser', async (id) => {
     try {
-      const response = await fetch(`/users?userId=${id}`);
+      const response = await fetch(`api/users?userId=${id}`);
   
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

@@ -4,7 +4,7 @@
   "description": "Introducing SmileWave, a new social network that's all about spreading positivity and connecting people from all walks of life! Say goodbye to negativity and hello to endless opportunities for friendship, support, and inspiration. Join me in building a brighter future with SmileWave.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "helmet": "^6.0.1",
     "mongoose": "^6.9.1",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "timeago.js": "^4.0.2"
   }
 }

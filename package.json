@@ -4,6 +4,13 @@
   "description": "Complete full stack social media app",
   "main": "index.js",
   "scripts": {
+    "install-server": "npm install --prefix API",
+    "install-client": "npm install --prefix client",
+    "install": "npm run install-server && npm run install-client",
+    "deploy": "set BUILD_PATH=../API/public && npm run build --prefix client && npm start --prefix API",
+    "deploy-cluster": "npm run build --prefix client && npm run cluster --prefix API",
+    "server": "npm run watch --prefix API",
+    "client": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -7,9 +7,9 @@ const initialState = {
   error: false,
 };
 
-export const login = createAsyncThunk("auth/login", async (userCredential) => {
+export const login = createAsyncThunk("api/auth/login", async (userCredential) => {
   try{
-    const response = await axios.post("/auth/login", userCredential);
+    const response = await axios.post("api/auth/login", userCredential);
     const data = response.data;
   return data;
   }catch (error) {
@@ -18,9 +18,9 @@ export const login = createAsyncThunk("auth/login", async (userCredential) => {
   }
 });
 
-export const register = createAsyncThunk("auth/register", async (user) => {
+export const register = createAsyncThunk("api/auth/register", async (user) => {
   try {
-     await axios.post("/auth/register", user);
+     await axios.post("api/auth/register", user);
 
   } catch (error) {
     console.error(error);

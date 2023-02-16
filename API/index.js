@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const userRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 const postRoute = require("./routes/posts");
+const path = require('path');
 
 dotenv.config();
 
@@ -25,6 +26,11 @@ app.use(morgan("common"));
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRoute);
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/*', (req,res)=>{
+    res.sendFile(path.join(__dirname, '..', 'API', 'public', 'index.html'))
+})
 
 app.listen(8000, ()=>{
     console.log('server running ');
