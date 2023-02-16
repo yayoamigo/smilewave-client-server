@@ -7,7 +7,7 @@ const initialState = {
 
 export const fetchPost = createAsyncThunk("fetchPost", async () => {
   try {
-    const response = await fetch("posts/timeline/63e41b996dd452f776eab9f1");
+    const response = await fetch("api/posts/timeline/63e41b996dd452f776eab9f1");
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
