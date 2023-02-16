@@ -1,6 +1,6 @@
 import {  useRef } from "react";
 import "./login.css";
-import { login } from "../../redux/authSlice";
+import { login } from "../../redux/ducks/authSlice";
 import { useSelector, useDispatch } from 'react-redux';
 import { CircularProgress } from '@mui/material';
 
@@ -21,7 +21,7 @@ export default function Login() {
       <div className="loginLeft">
         <h3 className="loginLogo">smilewave</h3>
         <span className="loginDesc">
-          Connect with friends and the world around you on Lamasocial.
+          start sharing positivity.
         </span>
       </div>
       <div className="loginRight">

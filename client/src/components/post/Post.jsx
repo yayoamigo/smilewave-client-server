@@ -3,7 +3,7 @@ import { MoreVert } from "@mui/icons-material";
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from "react";
-import { fetchUser } from "../../redux/userSlice";
+import { fetchUser } from "../../redux/ducks/userSlice";
 import {format} from "timeago.js"
 import { Link } from "react-router-dom";
 

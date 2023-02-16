@@ -5,7 +5,7 @@ import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchPostUser } from "../../redux/userPostSlice";
+import { fetchPostUser } from "../../redux/ducks/userPostSlice";
 import { useParams } from "react-router-dom";
 
 export default function Profile() {

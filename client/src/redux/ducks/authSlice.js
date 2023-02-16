@@ -18,6 +18,17 @@ export const login = createAsyncThunk("auth/login", async (userCredential) => {
   }
 });
 
+export const register = createAsyncThunk("auth/register", async (user) => {
+  try {
+     await axios.post("/auth/register", user);
+
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+});
+
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -37,8 +48,21 @@ const authSlice = createSlice({
         state.user = null;
         state.isFetching = false;
         state.error = true;
+      })
+      .addCase(register.pending, (state) => {
+        state.isFetching = true;
+        state.error = false;
+      })
+      .addCase(register.fulfilled, (state) => {
+        state.isFetching = false;
+        state.error = false;
+      })
+      .addCase(register.rejected, (state) => {
+        state.isFetching = false;
+        state.error = true;
       });
   },
 });
+
 
 export default authSlice;

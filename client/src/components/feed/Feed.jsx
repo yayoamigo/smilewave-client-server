@@ -3,9 +3,9 @@ import Share from "../share/Share";
 import "./feed.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from "react";
-import { fetchPost } from "../../redux/postSlice";
-import { fetchPostUser } from "../../redux/userPostSlice";
-import { setPostUser } from "../../redux/userPostSlice";
+import { fetchPost } from "../../redux/ducks/postSlice";
+import { fetchPostUser } from "../../redux/ducks/userPostSlice";
+import { setPostUser } from "../../redux/ducks/userPostSlice";
 
 export default function Feed({username}) {
 
