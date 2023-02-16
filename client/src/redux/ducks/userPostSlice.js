@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-
 const initialState = {
-    postUser: [], isLoading: true,
+    postUser: JSON.parse(localStorage.getItem("postUser")) || [],
+    isLoading: true,
 };
 
 export const fetchPostUser = createAsyncThunk('fetchPostUser', async (username) => {
@@ -19,27 +19,32 @@ export const fetchPostUser = createAsyncThunk('fetchPostUser', async (username) 
       console.error(error);
       throw error;
     }
-  });
-
-const postUserSlice = createSlice({
-    name: 'GET',
-    initialState,
-    reducers: {
-    },
-    extraReducers: (builder) => {
-    builder
-        .addCase(fetchPostUser.pending, (state) => {
-        state.isLoading = true;
-        })
-        .addCase(fetchPostUser.fulfilled, (state,  {payload} ) => {
-        state.isLoading = false;
-        state.postUser = payload
-    })
-        .addCase(fetchPostUser.rejected, (state) => {
-        state.isLoading = false;
-        });
-    },
 });
 
+const postUserSlice = createSlice({
+  name: 'postUser',
+  initialState,
+  reducers: {
+    setPostUser: (state, action) => {
+      state.postUser = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchPostUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchPostUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.postUser = payload;
+        
+      })
+      .addCase(fetchPostUser.rejected, (state) => {
+        state.isLoading = false;
+      });
+  },
+});
 
+export const { setPostUser } = postUserSlice.actions;
 export default postUserSlice;
+
