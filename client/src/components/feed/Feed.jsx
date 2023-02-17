@@ -8,7 +8,7 @@ import { fetchPostUser } from "../../redux/ducks/userPostSlice";
 import { setPostUser } from "../../redux/ducks/userPostSlice";
 
 export default function Feed({username}) {
-
+  const user = useSelector((state) => state.login.user)
   const post = useSelector((state) => state.post.post);
   const postUser = useSelector((state) => state.postUser.postUser);
   const postLoading =  useSelector((state) => state.post.isLoading);
@@ -25,7 +25,7 @@ export default function Feed({username}) {
         dispatch(fetchPostUser(username));
       }
     } else {
-      dispatch(fetchPost())
+      dispatch(fetchPost(user._id))
     }
   }, []);
 

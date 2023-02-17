@@ -26,8 +26,9 @@ export default function Profile() {
   useEffect(() => {
     if (username) {
       dispatch(fetchPostUser(username));
+      
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

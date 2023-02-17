@@ -6,22 +6,32 @@ import { useEffect } from "react";
 import { fetchUser } from "../../redux/ducks/userSlice";
 import {format} from "timeago.js"
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function Post({ post }) {
   const [like,setLike] = useState(post.likes.length)
   const [isLiked,setIsLiked] = useState(false)
   const user = useSelector((state) => state.user.user);
+  const userlog = useSelector((state) => state.login.user)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUser(post.userId));
-  }, []);
+  }, [dispatch]);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
-  const likeHandler =()=>{
-    setLike(isLiked ? like-1 : like+1)
-    setIsLiked(!isLiked)
-  }
+  useEffect(() => {
+    setIsLiked(post.likes.includes(userlog._id));
+  }, [userlog._id, post.likes]);
+
+  const likeHandler = () => {
+    try {
+      axios.put("api/posts/" + post._id + "/like", { userId: userlog._id });
+    } catch (err) {}
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
+  };
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -30,7 +40,7 @@ export default function Post({ post }) {
           <Link to={`profile/${user[post.userId]?.username}`}>
           <img
               className="postProfileImg"
-              src={user[post.userId]?.profilePicture || PF+"self.png"}
+              src={PF + user[post.userId]?.profilePicture || PF+"self.png"}
               alt=""
             />
           </Link>

@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   post: JSON.parse(localStorage.getItem("posts")) || [],
   isLoading: true,
 };
 
-export const fetchPost = createAsyncThunk("fetchPost", async () => {
+export const fetchPost = createAsyncThunk("fetchPost", async (username) => {
   try {
-    const response = await fetch("api/posts/timeline/63e41b996dd452f776eab9f1");
+    const response = await fetch(`api/posts/timeline/${username}`);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -20,6 +21,18 @@ export const fetchPost = createAsyncThunk("fetchPost", async () => {
     throw error;
   }
 });
+
+
+export const likePost = createAsyncThunk("likePost", async ({postId, userId}) => {
+  try {
+    const response = await axios.put(`api/posts/${postId}/like`, { userId });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+});
+
 
 const postSlice = createSlice({
   name: "GET",
@@ -37,7 +50,16 @@ const postSlice = createSlice({
       })
       .addCase(fetchPost.rejected, (state) => {
         state.isLoading = false;
-      });
+      })
+      .addCase(likePost.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(likePost.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(likePost.rejected, (state) => {
+        state.isLoading = false;
+      })
   },
 });
 

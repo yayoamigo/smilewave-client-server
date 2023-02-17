@@ -43,6 +43,7 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.isFetching = false;
         state.error = false;
+        localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(login.rejected, (state) => {
         state.user = null;
