@@ -47,7 +47,7 @@ export default function Post({ post }) {
             <span className="postUsername">
               {user[post.userId]?.username || "user"}
             </span>
-            <span className="postDate">{format(user[post.userId]?.createdAt || 22)}</span>
+            <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
             <MoreVert />
