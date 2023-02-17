@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 
 const initialState = {
   post: JSON.parse(localStorage.getItem("posts")) || [],
@@ -23,16 +22,6 @@ export const fetchPost = createAsyncThunk("fetchPost", async (username) => {
 });
 
 
-export const likePost = createAsyncThunk("likePost", async ({postId, userId}) => {
-  try {
-    const response = await axios.put(`api/posts/${postId}/like`, { userId });
-    return response.data;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-});
-
 
 const postSlice = createSlice({
   name: "GET",
@@ -45,21 +34,14 @@ const postSlice = createSlice({
       })
       .addCase(fetchPost.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.post = payload;
-        localStorage.setItem("posts", JSON.stringify(payload)); // save the posts to localStorage
+        state.post = payload.sort((p1, p2) => {
+          return new Date(p2.createdAt) - new Date(p1.createdAt);
+        });
+        localStorage.setItem("posts", JSON.stringify(state.post)); // save the sorted posts to localStorage
       })
       .addCase(fetchPost.rejected, (state) => {
         state.isLoading = false;
-      })
-      .addCase(likePost.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(likePost.fulfilled, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(likePost.rejected, (state) => {
-        state.isLoading = false;
-      })
+      });
   },
 });
 
