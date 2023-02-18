@@ -28,7 +28,7 @@ export default function Profile() {
       dispatch(fetchPostUser(username));
       
     }
-  }, [dispatch]);
+  }, [userName]);
 
   return (
     <>

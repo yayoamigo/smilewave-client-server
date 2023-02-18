@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 
 const initialState = {
@@ -9,14 +10,9 @@ const initialState = {
 
 export const fetchUser = createAsyncThunk('fetchUser', async (id) => {
     try {
-      const response = await fetch(`api/users?userId=${id}`);
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      return data;
+      const response = await axios.get(`http://localhost:8000/api/users?userId=${id}`);
+ 
+      return response.data;
     } catch (error) {
       console.error(error);
       throw error;

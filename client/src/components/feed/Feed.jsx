@@ -2,7 +2,7 @@ import Post from "../post/Post";
 import Share from "../share/Share";
 import "./feed.css";
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchPost } from "../../redux/ducks/postSlice";
 import { fetchPostUser } from "../../redux/ducks/userPostSlice";
 import { setPostUser } from "../../redux/ducks/userPostSlice";
@@ -36,7 +36,7 @@ export default function Feed({username}) {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share />
+      {(!username || username === user.username) && <Share />}
         {postLoading ? (
           <div className="loading">Loading...</div>
         ) : username ? (

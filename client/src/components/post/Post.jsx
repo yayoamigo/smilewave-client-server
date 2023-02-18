@@ -16,7 +16,7 @@ export default function Post({ post }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUser(post.userId));
-  }, [dispatch]);
+  }, []);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
@@ -40,7 +40,7 @@ export default function Post({ post }) {
           <Link to={`profile/${user[post.userId]?.username}`}>
           <img
               className="postProfileImg"
-              src={PF + user[post.userId]?.profilePicture || PF+"self.png"}
+              src={user[post.userId]?.profilePicture ? PF + user[post.userId]?.profilePicture : PF + "self.png"}
               alt=""
             />
           </Link>
