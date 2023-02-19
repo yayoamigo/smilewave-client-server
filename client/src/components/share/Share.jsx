@@ -33,6 +33,14 @@ export default function Share() {
     } catch (err) {}
   };
 
+  const handleCancelFile = () => {
+    setFile(null);
+  }
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  }
+
   return (
     <div className="share">
       <div className="shareWrapper">
@@ -56,7 +64,7 @@ export default function Share() {
         {file && (
           <div className="shareImgContainer">
             <img className="shareImg" src={URL.createObjectURL(file)} alt="" />
-            <Cancel className="shareCancelImg" onClick={() => setFile(null)} />
+            <Cancel className="shareCancelImg" onClick={handleCancelFile} />
           </div>
         )}
         <form className="shareBottom" onSubmit={submitHandler}>
@@ -69,7 +77,7 @@ export default function Share() {
                 type="file"
                 id="file"
                 accept=".png,.jpeg,.jpg"
-                onChange={(e) => setFile(e.target.files[0])}
+                onChange={handleFileChange}
               />
             </label>
             <div className="shareOption">
