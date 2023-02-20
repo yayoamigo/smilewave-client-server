@@ -1,43 +1,43 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
 const initialState = {
-  user: {},
+  users: JSON.parse(localStorage.getItem("users")) || {},
   isLoading: true,
 };
 
+export const fetchUsers = createAsyncThunk('fetchUsers', async () => {
+  try {
+    const response = await axios.get(`http://localhost:8000/api/users/all`);
 
-export const fetchUser = createAsyncThunk('fetchUser', async (id) => {
-    try {
-      const response = await axios.get(`http://localhost:8000/api/users?userId=${id}`);
- 
-      return response.data;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+});
 
-const userSlice = createSlice({
-    name: 'GET',
-    initialState,
-    reducers: {
-    },
-    extraReducers: (builder) => {
-      builder
-          .addCase(fetchUser.pending, (state) => {
-              state.isLoading = true;
-          })
-          .addCase(fetchUser.fulfilled, (state, { payload }) => {
-              state.isLoading = false;
-              state.user[payload._id] = payload; // Update user object with new data
-          })
-          .addCase(fetchUser.rejected, (state) => {
-              state.isLoading = false;
-          });
-  }  
+const usersSlice = createSlice({
+  name: 'users',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUsers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchUsers.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        payload.forEach(user => {
+          state.users[user._id] = user;
+        });
+        localStorage.setItem('users', JSON.stringify(state.users));
+      })
+      .addCase(fetchUsers.rejected, (state) => {
+        state.isLoading = false;
+      });
+  },
 });
 
 
-export default userSlice;
+export default usersSlice;

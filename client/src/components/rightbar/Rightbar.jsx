@@ -1,5 +1,4 @@
 import "./rightbar.css";
-import { Users } from "../../dummyData";
 import Online from "../online/Online";
 import { fetchFriends } from "../../redux/ducks/friendsSlice";
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,8 +9,9 @@ import { Add, Remove } from "@mui/icons-material";
 
 
 export default function Rightbar({ user }) {
-  const friends = useSelector((state) => state.friends.friendsByUserId)
-  const currentUser = useSelector((state) => state.login.user)
+  const friends = useSelector((state) => state.friends.friendsByUserId);
+  const currentUser = useSelector((state) => state.login.user);
+  const users = useSelector((state) => state.users.users);
   const dispatch = useDispatch()
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [followed, setFollowed] = useState(false);
@@ -56,11 +56,14 @@ export default function Rightbar({ user }) {
           </span>
         </div>
         <img className="rightbarAd" src={`${PF}kfc.jpg`} alt="" />
-        <h4 className="rightbarTitle">Online Friends</h4>
+        <h4 className="rightbarTitle">meet new people</h4>
         <ul className="rightbarFriendList">
-          {Users.map((u) => (
-            <Online key={u.id} user={u} />
-          ))}
+        {Object.values(users).map((u) => {
+        if (currentUser.followings.includes(u._id) || currentUser._id === u._id) {
+        return null; // Skip rendering this user
+          }
+        return <Online key={u._id} user={u} />;
+        })}
         </ul>
       </>
     );
