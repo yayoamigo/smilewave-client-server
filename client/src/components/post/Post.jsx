@@ -3,7 +3,7 @@ import { MoreVert } from "@mui/icons-material";
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from "react";
-import { fetchUser } from "../../redux/ducks/userSlice";
+import { fetchUsers } from "../../redux/ducks/userSlice";
 import {format} from "timeago.js"
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -11,11 +11,11 @@ import axios from "axios";
 export default function Post({ post }) {
   const [like,setLike] = useState(post.likes.length)
   const [isLiked,setIsLiked] = useState(false)
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.users.users);
   const userlog = useSelector((state) => state.login.user)
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchUser(post.userId));
+    dispatch(fetchUsers());
   }, []);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER

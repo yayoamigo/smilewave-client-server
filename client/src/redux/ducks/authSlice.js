@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  user: JSON.parse(localStorage.getItem("user")) || null,
+  user: null,
   isFetching: false,
   error: false,
 };
@@ -43,7 +43,6 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.isFetching = false;
         state.error = false;
-        localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(login.rejected, (state) => {
         state.user = null;

@@ -9,16 +9,16 @@ import { fetchPostUser } from "../../redux/ducks/userPostSlice";
 import { useParams } from "react-router-dom";
 
 export default function Profile() {
-  const users = useSelector((state) => state.user.user);
+  const users = useSelector((state) => state.users.users);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const userName = useParams().username;
   const dispatch = useDispatch();
 
   let username = userName; // replace with the actual username you want to find
   let user = null;
-  for (let id in users) {
-    if (users[id].username === username) {
-      user = users[id];
+  for (let _id in users) {
+    if (users[_id].username === username) {
+      user = users[_id];
       break;
     }
   }
