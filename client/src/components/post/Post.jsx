@@ -12,7 +12,7 @@ export default function Post({ post }) {
   const [like,setLike] = useState(post.likes.length)
   const [isLiked,setIsLiked] = useState(false)
   const user = useSelector((state) => state.users.users);
-  const userlog = useSelector((state) => state.login.user)
+  const userlog = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUsers());

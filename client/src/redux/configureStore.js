@@ -4,6 +4,7 @@ import usersSlice from './ducks/userSlice';
 import postUserSlice from './ducks/userPostSlice';
 import authSlice from './ducks/authSlice';
 import friendsSlice from './ducks/friendsSlice';
+import adminSlice from './ducks/adminSlice';
 
 const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
       postUser: postUserSlice.reducer,
       login: authSlice.reducer,
       friends: friendsSlice.reducer,
+      admin: adminSlice.reducer,
     },
   });
   

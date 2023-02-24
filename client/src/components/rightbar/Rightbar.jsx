@@ -6,27 +6,37 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Add, Remove } from "@mui/icons-material";
+import { fetchAdmin } from "../../redux/ducks/adminSlice";
+
 
 
 export default function Rightbar({ user }) {
   const friends = useSelector((state) => state.friends.friendsByUserId);
   const currentUser = useSelector((state) => state.login.user);
+  const admin = useSelector((state) => state.admin.admin);
   const users = useSelector((state) => state.users.users);
   const dispatch = useDispatch()
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [followed, setFollowed] = useState(false);
-  
-  useEffect(()=>{
-    setFollowed(currentUser.followings.includes(user?._id))
-  },[user])
+  const filteredUsers = Object.values(users).filter(
+    (u) => !friends[currentUser._id]?.find((f) => f._id === u._id)
+  );
+
   
   useEffect(() => {
-    if (user !== undefined) {
-      
+    if (user) {
       dispatch(fetchFriends(user._id));
     }
-  }, [dispatch]);
-  console.log(friends);
+    
+    async function fetchAdminData() {
+      await dispatch(fetchAdmin(currentUser._id));
+    }
+    fetchAdminData();
+    
+    setFollowed(admin?.followings?.includes(user?._id));
+  }, [dispatch, user]);
+  
+ 
   const handleClick = async () => {
     try {
       if (followed) {
@@ -45,8 +55,8 @@ export default function Rightbar({ user }) {
     }
   };
 
-
   const HomeRightbar = () => {
+    
     return (
       <>
         <div className="birthdayContainer">
@@ -58,17 +68,15 @@ export default function Rightbar({ user }) {
         <img className="rightbarAd" src={`${PF}kfc.jpg`} alt="" />
         <h4 className="rightbarTitle">meet new people</h4>
         <ul className="rightbarFriendList">
-        {Object.values(users).map((u) => {
-        if (currentUser.followings.includes(u._id) || currentUser._id === u._id) {
-        return null; // Skip rendering this user
-          }
-        return <Online key={u._id} user={u} />;
-        })}
+          {filteredUsers?.map((u) => (
+            <Online key={u._id} user={u} />
+          ))}
         </ul>
       </>
     );
   };
-
+  
+  
   const ProfileRightbar = () => {
     return (
       <div className="profileDiv">
