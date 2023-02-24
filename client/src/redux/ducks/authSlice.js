@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem("login")) || null,
   isFetching: false,
   error: false,
 };
@@ -42,6 +42,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isFetching = false;
+        localStorage.setItem("login", JSON.stringify(state.user)); // save the sorted posts to localStorage
         state.error = false;
       })
       .addCase(login.rejected, (state) => {

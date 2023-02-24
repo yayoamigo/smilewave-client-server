@@ -45,7 +45,7 @@ export default function Feed({username}) {
   return (
     <div className="feed">
       <div className="feedWrapper">
-      {(!username || username === user.username) && <Share />}
+      {(!username ) && <Share />}
         {postLoading ? (
           <div className="loading">Loading...</div>
         ) : username ? (

@@ -73,3 +73,7 @@
   .friends{
     margin-bottom: 5px;
   }
+
+  li.sidebarFriend {
+    margin-top: 5px;
+}

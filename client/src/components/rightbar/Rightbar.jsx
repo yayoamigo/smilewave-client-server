@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Add, Remove } from "@mui/icons-material";
 import { fetchAdmin } from "../../redux/ducks/adminSlice";
+import { motion } from 'framer-motion';
+
 
 
 
@@ -78,13 +80,36 @@ export default function Rightbar({ user }) {
   
   
   const ProfileRightbar = () => {
+     // Define variants for the list items and container
+  const listItemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 },
+  };
+  const listContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+    },
+  };
+    const followButtonVariants = {
+      initial: { scale: 1 },
+      hover: { scale: 1.1 },
+    };
+  
     return (
       <div className="profileDiv">
         {user.username !== currentUser.username && (
-          <button className="rightbarFollowButton" onClick={handleClick}>
+          <motion.button
+            className="rightbarFollowButton"
+            onClick={handleClick}
+            variants={followButtonVariants}
+            initial="initial"
+            whileHover="hover"
+          >
             {followed ? "Unfollow" : "Follow"}
             {followed ? <Remove /> : <Add />}
-          </button>
+          </motion.button>
         )}
         <h4 className="rightbarTitle">User information</h4>
         <div className="rightbarInfo">
@@ -102,31 +127,36 @@ export default function Rightbar({ user }) {
           </div>
         </div>
         {friends[user._id] && (
-          <>
-            <h4 className="rightbarTitle">User friends</h4>
-            <div className="rightbarFollowings">
-              {friends[user._id].map((friend) => (
-                <Link
-                  to={"/profile/" + friend.username}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div className="rightbarFollowing">
-                    <img
-                      src={
-                        friend.profilePicture
-                          ? PF + friend.profilePicture
-                          : PF + "self.png"
-                      }
-                      alt=""
-                      className="rightbarFollowingImg"
-                    />
-                    <span className="rightbarFollowingName">{friend.username}</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </>
-        )}
+        <motion.div
+          className="rightbarFollowings"
+          variants={listContainerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <h4 className="rightbarTitle">User friends</h4>
+          {friends[user._id].map((friend) => (
+            <Link
+              to={`/profile/${friend.username}`}
+              key={friend._id}
+              style={{ textDecoration: 'none' }}
+            >
+              <motion.div
+                className="rightbarFollowing"
+                variants={listItemVariants}
+              >
+                <motion.img
+                  src={friend.profilePicture ? PF + friend.profilePicture : PF + 'self.png'}
+                  alt=""
+                  className="rightbarFollowingImg"
+                />
+                <motion.span className="rightbarFollowingName">
+                  {friend.username}
+                </motion.span>
+              </motion.div>
+            </Link>
+          ))}
+        </motion.div>
+      )}
       </div>
     );
   };
