@@ -18,7 +18,6 @@ import { useDispatch } from "react-redux";
 
 export default function Sidebar() {
   const friend = useSelector((state) => state.friends.friendsByUserId);
-  const friends = friend[user._id]
   const user = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -70,12 +69,12 @@ export default function Sidebar() {
         <span className="friends">Friends</span>
         <br />
         <ul className="sidebarFriendList">
-        {Object.values(friends).map((friendArray) =>
-        friendArray.map((friend) => (
-        <Closefriend key={friend._id} user={friend} />
+          {friend[user._id] && Object.values(friend[user._id]).map((friend) => (
+          <Closefriend key={friend._id} user={friend} />
         ))
-        )}
-        </ul>
+        }
+</ul>
+
       </div>
     </div>
   );
