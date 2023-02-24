@@ -17,7 +17,7 @@ import { fetchFriends } from "../../redux/ducks/friendsSlice";
 import { useDispatch } from "react-redux";
 
 export default function Sidebar() {
-  const friends = useSelector((state) => state.friends.friendsByUserId);
+  const friend = useSelector((state) => state.friends.friendsByUserId);
   const user = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -66,13 +66,15 @@ export default function Sidebar() {
         </ul>
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
+        <span className="friends">Friends</span>
+        <br />
         <ul className="sidebarFriendList">
-        {Object.values(friends).map((friendArray) =>
-        friendArray.map((friend) => (
-        <Closefriend key={friend._id} user={friend} />
+          {friend[user._id] && Object.values(friend[user._id]).map((friend) => (
+          <Closefriend key={friend._id} user={friend} />
         ))
-        )}
-        </ul>
+        }
+</ul>
+
       </div>
     </div>
   );

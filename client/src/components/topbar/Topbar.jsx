@@ -2,10 +2,26 @@ import "./Topbar.css";
 import { Search, Person, Chat, Notifications } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { fetchAdmin } from "../../redux/ducks/adminSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 export default function Topbar() {
-  const user = useSelector((state) => state.login.user)
+  const currentUser = useSelector((state) => state.login.user);
+  const user = useSelector((state) => state.admin.admin)
   const PF = process.env.REACT_APP_PUBLIC_FOLDER
+
+  const dispatch = useDispatch()
+
+    
+  useEffect(() => {
+  
+    async function fetchAdminData() {
+      await dispatch(fetchAdmin(currentUser._id));
+    }
+    fetchAdminData();
+    
+  }, [dispatch]);
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
