@@ -4,7 +4,8 @@
   "description": "Introducing SmileWave, a new social network that's all about spreading positivity and connecting people from all walks of life! Say goodbye to negativity and hello to endless opportunities for friendship, support, and inspiration. Join me in building a brighter future with SmileWave.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,12 +24,14 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "helmet": "^6.0.1",
+    "jest": "^29.4.3",
     "mongoose": "^6.9.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.20",
     "path": "^0.12.7",
     "socket.io": "^4.6.1",
+    "supertest": "^6.3.3",
     "timeago.js": "^4.0.2"
   }
 }

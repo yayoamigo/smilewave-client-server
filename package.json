@@ -4,9 +4,7 @@
   "description": "Complete full stack social media app",
   "main": "index.js",
   "scripts": {
-    "install-API": "npm install --prefix /path/to/API",
-    "install-client": "npm install --prefix /path/to/client",
-    "install": "npm run install-API && npm run install-client ",
+    "postinstall": "cd API && npm install && cd ../client && npm install",
     "deploy": "set BUILD_PATH=../API/public && npm run build --prefix client && npm start --prefix API ",
     "deploy-cluster": "npm run build --prefix client && npm run cluster --prefix API",
     "API": "npm run watch --prefix API",

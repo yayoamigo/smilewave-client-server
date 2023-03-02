@@ -97,3 +97,5 @@ mongoose.connect(
     });
 
     sockets.listen(socketServer);
+    //exporting app
+    module.exports = app;
