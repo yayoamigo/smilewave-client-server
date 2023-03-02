@@ -53,7 +53,7 @@ Tech Stack <a name="tech-stack"></a>
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [link]([https://yourdeployedapplicationlink.com](https://drive.google.com/file/d/1Arp3D33DHjOnyXYGpe_Ax2B6uzag9FP2/view?usp=sharing))
+- [link](https://drive.google.com/file/d/1Arp3D33DHjOnyXYGpe_Ax2B6uzag9FP2/view?usp=sharing)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
