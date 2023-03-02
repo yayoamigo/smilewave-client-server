@@ -59,9 +59,11 @@ Tech Stack <a name="tech-stack"></a>
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
--**Npm install from the root folder**.
--**Npm run deploy from the root**.
--**Use the public image with Docker run -it -p 8000:8000 yayoamigo/smilewaveapp**
+- **Npm install from the root folder**
+- **Npm run deploy from the root**
+- **Use the public image with Docker run -it -p 8000:8000 yayoamigo/smilewaveapp**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 👥 Authors <a name="authors"></a>
 
