@@ -41,17 +41,19 @@ Tech Stack <a name="tech-stack"></a>
     <li><a href="https://aws.amazon.com/ec2/">AWS EC2</a></li>
   </ul>
 </details>
-## 🔭 Future Features <a name="future-features"></a>
-Custom Authentication
-Real-time Feed
-User Registration
-Chat Application
+
+### Key Features <a name="key-features"></a>
+
+- **Custom Authentication**
+- **Real-time Feed**
+- **User Registrationd**
+- **Chat aplication**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
 - [N/A]([https://yourdeployedapplicationlink.com](https://drive.google.com/file/d/1Arp3D33DHjOnyXYGpe_Ax2B6uzag9FP2/view?usp=sharing))
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
