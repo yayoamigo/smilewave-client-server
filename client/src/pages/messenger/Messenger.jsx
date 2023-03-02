@@ -127,7 +127,7 @@ export default function Messenger() {
                 <div className="chatBoxBottom">
                   <textarea
                     className="chatMessageInput"
-                    placeholder="write something..."
+                    placeholder="Wait for your friend to be online before sending a message."
                     onChange={(e) => setNewMessage(e.target.value)}
                     value={newMessage}
                   ></textarea>

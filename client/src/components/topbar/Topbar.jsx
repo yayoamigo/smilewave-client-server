@@ -41,13 +41,15 @@ export default function Topbar() {
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
-          <span className="topbarLink">Homepage</span>
+        <Link to="/messenger" style={{textDecoration:"none"}}>
+        <span className="topbarLink">Messenger</span>
+        </Link>
+        <Link to="/" style={{textDecoration:"none"}}>
           <span className="topbarLink">Timeline</span>
+        </Link>
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
-            <Person />
-            <span className="topbarIconBadge">1</span>
           </div>
           <div className="topbarIconItem">
             <Link to="/messenger" style={{textDecoration:"none"}}>
@@ -56,8 +58,6 @@ export default function Topbar() {
             </Link>
           </div>
           <div className="topbarIconItem">
-            <Notifications />
-            <span className="topbarIconBadge">1</span>
           </div>
         </div>
         <Link to={`/profile/${user?.username}`}>
