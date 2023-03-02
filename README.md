@@ -20,28 +20,32 @@
 - [❓ FAQ](#faq)
 - [📝 License](#license)
 
-# 📖 Clinic Database <a name="about-project"></a>
+Social Media App <a name="about-project"></a>
+This social media app features custom authentication, real-time feed, user registration, and chat application. Intuitive design and cutting-edge technology deliver a seamless user experience. A full-stack masterpiece.
 
-In this project, we interpreted a database diagram and implemented the SQL needed to build the database schema.
-
-## 🛠 Built With <a name="built-with"></a>
-
-### Tech Stack <a name="tech-stack"></a>
-
+Built With <a name="built-with"></a>
+Tech Stack <a name="tech-stack"></a>
 <details>
-<summary>Database</summary>
+<summary>Frontend</summary>
   <ul>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+    <li><a href="https://reactjs.org/">React</a></li>
+    <li><a href="https://redux.js.org/">Redux</a></li>
   </ul>
 </details>
-
-### Key Features <a name="key-features"></a>
-
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## 🚀 Live Demo <a name="live-demo"></a>
+<details>
+<summary>Backend</summary>
+  <ul>
+    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
+    <li><a href="https://expressjs.com/">Express</a></li>
+    <li><a href="https://socket.io/">Socket.IO</a></li>
+    <li><a href="https://aws.amazon.com/ec2/">AWS EC2</a></li>
+  </ul>
+</details>
+Key Features <a name="key-features"></a>
+Custom Authentication
+Real-time Feed
+User Registration
+Chat Application
 
 - [N/A](https://yourdeployedapplicationlink.com)
 
