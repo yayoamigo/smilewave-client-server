@@ -51,7 +51,13 @@ Tech Stack <a name="tech-stack"></a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🚀 Live Demo <a name="live-demo"></a>
+## 🚀  live <a name="live-demo"></a>
+
+- [link](https://64064f337d64bd0007087e62--inquisitive-mochi-05d2dc.netlify.app/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🚀 video demo <a name="live-demo"></a>
 
 - [link](https://drive.google.com/file/d/1Arp3D33DHjOnyXYGpe_Ax2B6uzag9FP2/view?usp=sharing)
 
